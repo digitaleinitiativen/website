@@ -1,0 +1,15 @@
+/*--------------------------------------------------------------
+# 04 - ELEMENT - LINKS
+--------------------------------------------------------------*/
+a:hover {
+    text-decoration-style: dotted;
+}
+
+a:active,
+a:focus {
+    text-decoration: underline;
+}
+
+*:focus {
+    outline: thin dotted;
+}

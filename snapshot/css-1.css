@@ -1,0 +1,102 @@
+/*--------------------------------------------------------------
+# FALLBACK VARIABLES
+- fontsize
+- line-height
+- container widths
+- gutter
+- vertical rhythm
+--------------------------------------------------------------*/
+:root {
+    --containerquery: 768px;
+
+    --fontsize-min: 1.6;
+    --fontsize-max: 3.2;
+    --fontsize-minwidth: 192;
+    --fontsize-maxwidth: 384;
+    --fontsize-ratio: 1.2;
+
+    --line-height: 1.5;
+    --line-height-7: var(--line-height);
+
+    --max-width-1-setting: 999999; /* stupid high number to always fill the width */
+    --max-width-2-setting: 1280;
+    --max-width-3-setting: 768;
+}
+
+/*--------------------------------------------------------------
+# SPACING
+--------------------------------------------------------------*/
+:root {
+    --gutter: 2.4rem;
+    --gutter-outer: var(--gutter);
+    --vertical-rhythm: var(--gutter);
+}
+
+/*--------------------------------------------------------------
+# COLORS FALLBACK
+--------------------------------------------------------------*/
+:root {
+    --color-white: var(--wp--preset--color--white, #ffffff);
+    --color-black: var(--wp--preset--color--black, #000000);
+
+    --color-1: var(--wp--preset--color--1);
+    --color-2: var(--wp--preset--color--2);
+    --color-3: var(--wp--preset--color--3);
+
+    --color-4: var(--wp--preset--color--4);
+    --color-5: var(--wp--preset--color--5);
+    --color-6: var(--wp--preset--color--6);
+}
+
+/*--------------------------------------------------------------
+# FONT FAMILY - FALLBACK
+--------------------------------------------------------------*/
+:root {
+    --font-family-1: sans-serif;
+    --font-family-2: serif;
+    --font-family-3: monospace;
+}
+
+/*--------------------------------------------------------------
+# LINE HEIGHT
+--------------------------------------------------------------*/
+:root {
+    --line-height: 1.5;
+
+    --line-height-a: var(--line-height);
+    --line-height-b: var(--line-height);
+    --line-height-c: var(--line-height);
+    --line-height-0: var(--line-height);
+
+    --line-height-1: var(--line-height);
+    --line-height-2: var(--line-height);
+    --line-height-3: var(--line-height);
+    --line-height-4: var(--line-height);
+    --line-height-5: var(--line-height);
+    --line-height-6: var(--line-height);
+    --line-height-7: var(--line-height);
+
+    --line-height-8: var(--line-height);
+    --line-height-9: var(--line-height);
+}
+
+/*--------------------------------------------------------------
+# CALCULATION VARIABLES
+--------------------------------------------------------------*/
+:root {
+    --zero: 0;
+
+    --quarter: calc(1/4);
+    --third: calc(1/3);
+    --half: calc(1/2);
+    --two-thirds: calc(2/3);
+    --three-quarters: calc(3/4);
+
+    --whole: 1;
+
+    --and-half: 1.5;
+
+    --double: 2;
+    --tripple: 3;
+    --quadruple: 4;
+}

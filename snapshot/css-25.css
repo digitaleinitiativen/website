@@ -1,0 +1,87 @@
+:root {
+  --nav-offset: 5px;
+}
+
+@media (min-width: 768px) {
+
+  /*--------------------------------------------------------------
+  # NAV PRIMARY - Usually Header
+  --------------------------------------------------------------*/
+  .nav--header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nav--header .nav__item {
+    position: relative;
+    margin-left: calc(var(--nav-offset) * -1);
+    margin-bottom: calc(var(--nav-offset) * -1);
+  }
+
+  .nav--header .nav__link {
+    padding: .125em .25em;
+    border: var(--nav-offset) solid var(--color-4);
+    color: var(--color-4);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+  }
+
+  .current_page_parent > .nav__link, 
+  .nav--header .nav__link--active {
+    background-color: var(--color-4);
+    color: var(--color-1);
+  }
+
+  .nav--header .nav__link:hover,
+  .nav--header .nav__link:active,
+  .nav--header .nav__link:focus {
+    text-decoration: none;
+    background-color: var(--color-5);
+  }
+
+  /*--------------------------------------------------------------
+  # LEVEL 2
+  --------------------------------------------------------------*/
+  .nav--header .nav--sub {
+    display: none;
+    position: absolute;
+    background-color: var(--color-1);
+    z-index: 10000;
+    margin-top: calc(var(--nav-offset) * -1);
+    left: var(--nav-offset);
+  }
+
+  .nav--header>.nav__item:hover>.nav--sub,
+  .nav--header>.nav__item:focus-within>.nav--sub {
+    display: block;
+  }
+
+  /*--------------------------------------------------------------
+  # LEVEL 3
+  - Last menu items opens to the left instead of right
+  --------------------------------------------------------------*/
+  .nav--header .nav--sub>.nav__item:hover>.nav--sub,
+  .nav--header .nav--sub>.nav__item:active>.nav--sub,
+  .nav--header .nav--sub>.nav__item:focus>.nav--sub,
+  .nav--header .nav--sub>.nav__item:focus-within>.nav--sub {
+    display: block;
+  }
+
+  .nav--header .nav__item--active>.nav__link,
+  .nav--header .current_page_ancestor>.nav__link {
+    /* color: var(--color-1); */
+  }
+
+  .nav--header .nav--sub .nav--sub {
+    left: 100%;
+    top: 0;
+  }
+
+  .nav--header>.nav__item:last-child .nav--sub .nav--sub {
+    right: 100%;
+    left: initial;
+  }
+}

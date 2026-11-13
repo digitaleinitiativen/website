@@ -1,0 +1,108 @@
+/*--------------------------------------------------------------
+# RESET NAV LIST STYLES
+--------------------------------------------------------------*/
+.nav,
+.nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav__link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  /* white-space: nowrap; */
+}
+
+.burger__input {
+  display: none;
+}
+
+.burger__label {
+  display: none;
+  cursor: pointer;
+}
+
+/*--------------------------------------------------------------
+# NAV SECONDARY - Usually Footer
+--------------------------------------------------------------*/
+.nav--footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(var(--gutter) * .5);
+}
+
+.nav--footer .nav__link:hover,
+.nav--footer .nav__link:active,
+.nav--footer .nav__link:focus,
+.nav--footer .nav__link--active {
+  color: var(--color-1);
+}
+
+
+/*--------------------------------------------------------------
+# NAV PAGINATION
+--------------------------------------------------------------*/
+.nav--pagination {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--gutter);
+
+  margin-top: var(--gutter);
+  margin-bottom: var(--gutter);
+  margin-left: auto;
+  margin-right: auto;
+  max-width: var(--max-width-3);
+}
+
+.nav-next {
+  margin-left: auto;
+}
+
+.nav-previous {
+  margin-right: auto;
+}
+
+
+/*--------------------------------------------------------------
+# NAV PREVIOUS & OLDER POSTS
+--------------------------------------------------------------*/
+.nav--prev-next {
+  margin-top: var(--gutter-outer);
+  margin-bottom: var(--gutter-outer);
+
+  margin-left: auto;
+  margin-right: auto;
+  max-width: var(--max-width-3);
+
+  padding-left: var(--gutter-outer);
+  padding-right: var(--gutter-outer);
+}
+
+.nav--prev-next .nav-links {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--gutter);
+}
+
+.nav--prev-next .nav-links a {
+  text-decoration: none;
+  appearance: none;
+  border-radius: 0;
+  background-color: transparent;
+  border: 5px solid;
+  color: var(--color-4);
+  text-transform: uppercase;
+  letter-spacing: .2em;
+  padding: .25em .5em;
+  font-weight: 900;
+  font-family: var(--font-family-1);
+}
+
+
+.menu {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}

@@ -1,0 +1,91 @@
+/*--------------------------------------------------------------
+# LIMIT CONTENT
+--------------------------------------------------------------*/
+.lc {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+.lc--1 {
+  max-width: var(--max-width-1);
+}
+
+.lc--2 {
+  max-width: var(--max-width-2);
+}
+
+.lc--3 {
+  max-width: var(--max-width-3);
+}
+
+.lc--padding {
+  padding-left: var(--gutter-outer);
+  padding-right: var(--gutter-outer);
+}
+
+/*--------------------------------------------------------------
+# POSITION
+--------------------------------------------------------------*/
+.position--static {
+  position: static;
+}
+
+.position--relative {
+  position: relative;
+}
+
+.position--absolute {
+  position: absolute;
+}
+
+.position--fixed {
+  position: fixed;
+}
+
+.position--sticky {
+  position: sticky;
+}
+
+/*--------------------------------------------------------------
+# DISPLAY
+--------------------------------------------------------------*/
+.hidden,
+.display--none {
+  display: none;
+}
+
+.display--block {
+  display: block;
+}
+
+.display--inline {
+  display: inline;
+}
+
+.display--inline-block {
+  display: inline-block;
+}
+
+.display--flex {
+  display: flex;
+}
+
+.display--grid {
+  display: grid;
+}
+
+/*--------------------------------------------------------------
+# MIN HEIGHT
+--------------------------------------------------------------*/
+.min-height--100vh {
+  min-height: 100vh;
+}
+
+.min-height--100 {
+  min-height: 100%;
+}
+
+.height--100 {
+  height: 100%;
+}

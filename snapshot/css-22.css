@@ -1,0 +1,28 @@
+/*--------------------------------------------------------------
+# FOOTER
+--------------------------------------------------------------*/
+.footer__bottom {
+    font-weight: bold;
+
+}
+
+.footer__bottom-content {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: var(--max-width-3);
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--gutter);
+    
+    padding-top: calc(var(--gutter) / 2);
+    padding-bottom: calc(var(--gutter) / 2);
+
+    font-size: var(--font-size-9);
+}
+
+.footer .wp-block-latest-posts__list {
+    display: block;
+}

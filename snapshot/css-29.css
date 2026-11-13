@@ -1,0 +1,82 @@
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="password"],
+input[type="search"],
+input[type="number"],
+input[type="tel"],
+input[type="date"],
+input[type="month"],
+input[type="week"],
+input[type="time"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="color"] {
+	width: 100%;
+	padding: .25em .25em;
+
+	background-color: var(--bgcolor-form);
+	border: 1px solid var(--color-black);
+	font-size: 1em;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="password"]:focus,
+input[type="search"]:focus,
+input[type="number"]:focus,
+input[type="tel"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="week"]:focus,
+input[type="time"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="color"]:focus {}
+
+input[type="text"]:disabled,
+input[type="email"]:disabled,
+input[type="url"]:disabled,
+input[type="password"]:disabled,
+input[type="search"]:disabled,
+input[type="number"]:disabled,
+input[type="tel"]:disabled,
+input[type="date"]:disabled,
+input[type="month"]:disabled,
+input[type="week"]:disabled,
+input[type="time"]:disabled,
+input[type="datetime"]:disabled,
+input[type="datetime-local"]:disabled,
+input[type="color"]:disabled {}
+
+
+
+select {}
+
+select:focus {}
+
+textarea,
+.entry-content textarea {
+	width: 100%;
+	background-color: var(--bgcolor-form);
+	border: 1px solid var(--color-black);
+}
+
+label {
+	/* display: block; */
+}
+
+input[type="checkbox"]+label,
+input[type="radio"]+label {}
+
+fieldset {}
+
+fieldset legend {}
+
+fieldset input {}
+
+
+.entry-content .wpcf7-list-item {
+	margin-left: 0;
+}

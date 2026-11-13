@@ -1,0 +1,32 @@
+/*--------------------------------------------------------------
+# VARIABLES
+  - either set variables in customizer or
+  - copy variables from parent theme and override it here
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+# FONT FAMILY
+--------------------------------------------------------------*/
+:root {
+  --font-family-1: 'Fira Sans', sans-serif;
+  --font-family-2: 'Source Serif Pro', serif;
+  --font-family-3: 'Fira Code', sans-serif;
+
+  --bgcolor-form: rgba(255, 255, 255, 0.85);
+  --border-radius: .5em;
+}
+
+/*--------------------------------------------------------------
+# SPACING
+--------------------------------------------------------------*/
+:root {
+  --gutter: 2.4rem;
+  --gutter-outer: var(--gutter);
+  --vertical-rhythm: var(--gutter);
+}
+
+@media (min-width: 768px) {
+  :root {
+    --gutter-outer: calc(var(--gutter) * 2);
+  } 
+}

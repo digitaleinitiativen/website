@@ -1,0 +1,114 @@
+/*--------------------------------------------------------------
+# FLOAT
+--------------------------------------------------------------*/
+.alignleft {
+  float: left;
+  margin-right: var(--gutter-outer);
+  margin-bottom: var(--gutter-outer);
+}
+
+.alignright {
+  float: right;
+  margin-left: var(--gutter-outer);
+  margin-bottom: var(--gutter-outer);
+}
+
+.aligncenter {
+  clear: both;
+  display: block;
+  float: none;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+}
+
+/*--------------------------------------------------------------
+# TEXT ALIGN
+--------------------------------------------------------------*/
+.has-text-align-left {
+  text-align: left;
+}
+
+.has-text-align-center {
+  text-align: center;
+}
+
+.has-text-align-right {
+  text-align: right;
+}
+
+.has-text-align-justify {
+  text-align: justify;
+}
+
+/*--------------------------------------------------------------
+# CLEARFIX
+--------------------------------------------------------------*/
+.clearfix {
+  display: flow-root;
+}
+
+/*--------------------------------------------------------------
+  # WIDGETS GALLERY
+--------------------------------------------------------------*/
+[class*="gallery-columns"] {
+  display: grid;
+}
+
+.gallery-columns-1 {
+  grid-template-columns: repeat(1, 1fr);
+}
+
+.gallery-columns-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.gallery-columns-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.gallery-columns-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.gallery-columns-5 {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.gallery-columns-6 {
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.gallery-columns-7 {
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.gallery-columns-8 {
+  grid-template-columns: repeat(8, 1fr);
+}
+
+.gallery-columns-9 {
+  grid-template-columns: repeat(9, 1fr);
+}
+
+/*--------------------------------------------------------------
+# Classes needed to pass Wordpress Theme Checker
+--------------------------------------------------------------*/
+.wp-caption {}
+
+.wp-caption-text {}
+
+.sticky {}
+
+.gallery-caption {}
+
+.bypostauthor {}
+
+/*--------------------------------------------------------------
+# WIDGET DEFAULT STYLING
+--------------------------------------------------------------*/
+ul.widget {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
