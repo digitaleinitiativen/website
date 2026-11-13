@@ -1,0 +1,24 @@
+{
+  "name": "digitaleinitiativen-website",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "import:wordpress": "node scripts/import-wordpress.mjs",
+    "import:confluence": "node scripts/import-confluence.mjs",
+    "test": "node --test scripts/*.test.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "3.7.5",
+    "astro": "5.18.2"
+  },
+  "devDependencies": {
+    "turndown": "7.2.5",
+    "turndown-plugin-gfm": "1.0.2"
+  }
+}

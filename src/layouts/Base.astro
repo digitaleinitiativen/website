@@ -1,0 +1,62 @@
+---
+import "../styles/global.css";
+import { nav, site } from "../site";
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** Path of the Markdown file, for the "edit this page" link. */
+  source?: string;
+  wide?: boolean;
+}
+const { title, description = site.tagline, source, wide } = Astro.props;
+const path = Astro.url.pathname;
+const fullTitle = title ? `${title} · ${site.name}` : site.name;
+---
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="alternate" type="application/rss+xml" title={`${site.name}: What's up?`} href="/geschichten/rss.xml" />
+  </head>
+  <body>
+    <header class="site">
+      <div class="wrap">
+        <a class="brand" href="/">{site.name}</a>
+        <nav class="main" aria-label="Hauptmenü">
+          <ul>
+            {nav.map((item) => (
+              <li>
+                <a href={item.href} aria-current={path.startsWith(item.href) ? "page" : undefined}>{item.label}</a>
+                {item.children && (
+                  <ul>
+                    {item.children.map((c) => <li><a href={c.href}>{c.label}</a></li>)}
+                  </ul>
+                )}
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main class:list={["wrap", { prose: !wide }]}>
+      <slot />
+      {source && (
+        <p class="muted" style="margin-top:3rem">
+          Fehler gefunden? Sag es Ditarr in Slack oder <a href={`${site.editUrl}${source}`}>bearbeite die Seite auf GitHub</a>.
+        </p>
+      )}
+    </main>
+    <footer class="site">
+      <div class="wrap">
+        <strong>{site.name}</strong><br />
+        {site.address.map((line) => <>{line}<br /></>)}
+        <a href="/kontakt/">Kontakt</a> · <a href="/impressum/">Impressum</a> · <a href="/datenschutz/">Datenschutz</a>
+      </div>
+    </footer>
+  </body>
+</html>

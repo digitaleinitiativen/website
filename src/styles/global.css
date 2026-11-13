@@ -1,0 +1,56 @@
+:root {
+  --bg: #ffffff;
+  --fg: #1d1d1f;
+  --muted: #5f6368;
+  --accent: #0b6e4f;
+  --line: #e3e3e3;
+  --soft: #f5f5f3;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #121212;
+    --fg: #ececec;
+    --muted: #a0a0a0;
+    --accent: #4cc39a;
+    --line: #2c2c2c;
+    --soft: #1c1c1c;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: 17px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+a { color: var(--accent); }
+img { max-width: 100%; height: auto; }
+table { border-collapse: collapse; display: block; overflow-x: auto; }
+th, td { border: 1px solid var(--line); padding: 0.35em 0.6em; text-align: left; }
+pre { background: var(--soft); padding: 1em; overflow-x: auto; }
+.wrap { max-width: 72rem; margin: 0 auto; padding: 0 16px; }
+header.site { border-bottom: 1px solid var(--line); }
+header.site .wrap { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; align-items: center; padding-block: 0.8rem; }
+header.site .brand { font-weight: 700; color: var(--fg); text-decoration: none; margin-right: auto; }
+nav.main ul { list-style: none; display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; margin: 0; padding: 0; }
+nav.main a { color: var(--fg); text-decoration: none; }
+nav.main a:hover, nav.main a[aria-current] { color: var(--accent); }
+nav.main li { position: relative; }
+nav.main li ul { display: none; position: absolute; top: 100%; left: 0; z-index: 10; background: var(--bg); border: 1px solid var(--line); padding: 0.5rem 0.8rem; flex-direction: column; min-width: 11rem; }
+nav.main li:hover ul, nav.main li:focus-within ul { display: flex; }
+main { padding-block: 2rem 4rem; }
+main.prose { max-width: 46rem; }
+.layout-wiki { display: grid; gap: 2rem; grid-template-columns: 1fr; }
+@media (min-width: 900px) { .layout-wiki { grid-template-columns: 16rem 1fr; } }
+.wiki-nav { font-size: 0.92rem; }
+.wiki-nav ul { list-style: none; padding-left: 0.9rem; margin: 0.2rem 0; }
+.wiki-nav > ul { padding-left: 0; }
+.muted { color: var(--muted); font-size: 0.9rem; }
+.cards { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); padding: 0; list-style: none; }
+.cards li { border: 1px solid var(--line); border-radius: 8px; padding: 1rem 1.2rem; }
+.cards h3 { margin: 0 0 0.3rem; font-size: 1.1rem; }
+.hero { padding: 3rem 0 2rem; }
+.hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.15; margin: 0 0 1rem; }
+.button { display: inline-block; padding: 0.55em 1.1em; border-radius: 6px; background: var(--accent); color: var(--bg); text-decoration: none; font-weight: 600; margin-right: 0.6rem; }
+footer.site { border-top: 1px solid var(--line); padding-block: 2rem; color: var(--muted); font-size: 0.9rem; }

@@ -1,0 +1,33 @@
+---
+import { getCollection, render } from "astro:content";
+import WikiTree from "../../components/WikiTree.astro";
+import Base from "../../layouts/Base.astro";
+import { wikiHref, wikiTree } from "../../lib/wiki";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("wiki");
+  return entries.map((entry) => {
+    const href = wikiHref(entry.id);
+    const slug = href.replace(/^\/wiki\/?/, "").replace(/\/$/, "") || undefined;
+    return { params: { slug }, props: { entry } };
+  });
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const tree = wikiTree(await getCollection("wiki"));
+const current = wikiHref(entry.id);
+---
+<Base title={entry.data.title} source={`src/content/wiki/${entry.filePath?.split("src/content/wiki/")[1] ?? `${entry.id}.md`}`} wide>
+  <div class="layout-wiki">
+    <nav class="wiki-nav" aria-label="Wiki">
+      <p><a href="/wiki/"><strong>Makerlab-Wiki</strong></a></p>
+      <WikiTree nodes={tree.children} current={current} />
+    </nav>
+    <article class="prose">
+      <h1>{entry.data.title}</h1>
+      <Content />
+      {entry.data.updated && <p class="muted">Zuletzt geändert: {entry.data.updated.toLocaleDateString("de-AT")}</p>}
+    </article>
+  </div>
+</Base>

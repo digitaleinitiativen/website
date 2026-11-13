@@ -1,0 +1,48 @@
+name: Import from WordPress and Confluence
+
+# Run by hand (Actions → "Import from WordPress and Confluence" → Run workflow).
+# Opens a pull request with the imported Markdown, images and files.
+on:
+  workflow_dispatch:
+    inputs:
+      source:
+        description: What to import
+        type: choice
+        options: [both, wordpress, confluence]
+        default: both
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - if: inputs.source != 'confluence'
+        run: npm run import:wordpress | tee -a import.log
+      - if: inputs.source != 'wordpress'
+        run: npm run import:confluence | tee -a import.log
+        env:
+          CONFLUENCE_EMAIL: ${{ secrets.CONFLUENCE_EMAIL }}
+          CONFLUENCE_API_TOKEN: ${{ secrets.CONFLUENCE_API_TOKEN }}
+      - run: npm run build
+      - name: Open pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          branch="import/${{ inputs.source }}-$(date +%Y%m%d-%H%M)"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$branch"
+          git add src/content public
+          git commit -m "Import from ${{ inputs.source }}" || { echo "Nothing changed."; exit 0; }
+          git push -u origin "$branch"
+          { echo "Imported by the workflow run ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}."; echo; echo '```'; cat import.log; echo '```'; } > body.md
+          gh pr create --title "Import from ${{ inputs.source }}" --body-file body.md --base main --head "$branch"

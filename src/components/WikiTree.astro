@@ -1,0 +1,24 @@
+---
+import { wikiHref, type WikiNode } from "../lib/wiki";
+
+interface Props {
+  nodes: WikiNode[];
+  current: string;
+}
+const { nodes, current } = Astro.props;
+---
+<ul>
+  {nodes.map((node) => {
+    const href = node.entry ? wikiHref(node.entry.id) : undefined;
+    return (
+      <li>
+        {href ? (
+          <a href={href} aria-current={href === current ? "page" : undefined}>{node.entry!.data.title}</a>
+        ) : (
+          <span>{node.name}</span>
+        )}
+        {node.children.length > 0 && <Astro.self nodes={node.children} current={current} />}
+      </li>
+    );
+  })}
+</ul>
