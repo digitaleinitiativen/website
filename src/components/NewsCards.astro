@@ -1,0 +1,21 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { url } from "../lib/url";
+
+interface Props {
+  news: CollectionEntry<"news">[];
+}
+const { news } = Astro.props;
+---
+<ul class="cards">
+  {news.map((n) => (
+    <li class="card">
+      <div class="media">{n.data.image && <a href={url(`/geschichten/${n.id}/`)}><img src={url(n.data.image)} alt="" loading="lazy" /></a>}</div>
+      <div class="body">
+        <h3><a href={url(`/geschichten/${n.id}/`)}>{n.data.title}</a></h3>
+        <p class="muted">{n.data.date.toLocaleDateString("de-AT", { dateStyle: "long" })}</p>
+        {n.data.description && <p>{n.data.description}</p>}
+      </div>
+    </li>
+  ))}
+</ul>

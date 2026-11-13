@@ -1,5 +1,5 @@
 export const site = {
-  name: "Digitale Initiativen",
+  name: "Plattform für digitale Initiativen",
   tagline: "Gemeinsam bauen, tüfteln und lernen. In Dornbirn.",
   address: ["Dr.-Anton-Schneider-Straße 28b", "Gebäude M / Raum M02", "6850 Dornbirn"],
   editUrl: "https://github.com/digitaleinitiativen/website/edit/main/",
