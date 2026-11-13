@@ -15,6 +15,9 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "3.7.5",
+    "@fontsource/fira-code": "5.3.0",
+    "@fontsource/fira-sans": "5.3.0",
+    "@fontsource/source-serif-pro": "5.3.0",
     "astro": "5.18.2"
   },
   "devDependencies": {

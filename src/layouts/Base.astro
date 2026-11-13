@@ -1,5 +1,11 @@
 ---
+import "@fontsource/fira-sans/400.css";
+import "@fontsource/fira-sans/700.css";
+import "@fontsource/source-serif-pro/400.css";
+import "@fontsource/source-serif-pro/900.css";
+import "@fontsource/fira-code/700.css";
 import "../styles/global.css";
+import { getCollection } from "astro:content";
 import { url } from "../lib/url";
 import { nav, site } from "../site";
 
@@ -11,8 +17,10 @@ interface Props {
   wide?: boolean;
 }
 const { title, description = site.tagline, source, wide } = Astro.props;
-const path = Astro.url.pathname.slice(import.meta.env.BASE_URL.replace(/\/+$/, "").length);
+const base = import.meta.env.BASE_URL.replace(/\/+$/, "");
+const path = Astro.url.pathname.slice(base.length) || "/";
 const fullTitle = title ? `${title} · ${site.name}` : site.name;
+const latest = (await getCollection("news")).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 4);
 ---
 <!doctype html>
 <html lang="de">
@@ -21,13 +29,13 @@ const fullTitle = title ? `${title} · ${site.name}` : site.name;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
-    <link rel="icon" href={url("/favicon.svg")} type="image/svg+xml" />
+    <link rel="icon" href={url("/brand/icon.png")} type="image/png" />
     <link rel="alternate" type="application/rss+xml" title={`${site.name}: What's up?`} href={url("/geschichten/rss.xml")} />
   </head>
   <body>
     <header class="site">
       <div class="wrap">
-        <a class="brand" href={url("/")}>{site.name}</a>
+        <a class="brand" href={url("/")}><img src={url("/brand/logo.png")} alt={site.name} width="160" height="110" /></a>
         <nav class="main" aria-label="Hauptmenü">
           <ul>
             {nav.map((item) => (
@@ -45,18 +53,36 @@ const fullTitle = title ? `${title} · ${site.name}` : site.name;
       </div>
     </header>
     <main class:list={["wrap", { prose: !wide }]}>
-      <slot />
-      {source && (
-        <p class="muted" style="margin-top:3rem">
-          Fehler gefunden? Sag es Ditarr in Slack oder <a href={`${site.editUrl}${source}`}>bearbeite die Seite auf GitHub</a>.
-        </p>
-      )}
+      <div class="inner">
+        <slot />
+        {source && (
+          <p class="muted" style="margin-top:3rem">
+            Fehler gefunden? Sag es Ditarr in Slack oder <a href={`${site.editUrl}${source}`}>bearbeite die Seite auf GitHub</a>.
+          </p>
+        )}
+      </div>
     </main>
     <footer class="site">
       <div class="wrap">
-        <strong>{site.name}</strong><br />
-        {site.address.map((line) => <>{line}<br /></>)}
-        <a href={url("/kontakt/")}>Kontakt</a> · <a href={url("/impressum/")}>Impressum</a> · <a href={url("/datenschutz/")}>Datenschutz</a>
+        <div class="cols">
+          <section>
+            <h2>NEWS</h2>
+            <ul>{latest.map((n) => <li><a href={url(`/geschichten/${n.id}/`)}>{n.data.title}</a></li>)}</ul>
+          </section>
+          <section>
+            <h2>WIKI</h2>
+            <ul><li><a href={url("/wiki/")}>Makerlab-Wiki</a></li><li><a href={url("/makerlab/")}>Makerlab</a></li></ul>
+          </section>
+          <section>
+            <h2>KONTAKT</h2>
+            <p>{site.address.map((line) => <>{line}<br /></>)}</p>
+            <a href={url("/kontakt/")}>Kontakt</a>
+          </section>
+        </div>
+        <div class="bottom">
+          <span>© {site.name}</span>
+          <span><a href={url("/impressum/")}>Impressum</a> · <a href={url("/datenschutzerklaerung/")}>Datenschutz</a></span>
+        </div>
       </div>
     </footer>
   </body>

@@ -11,6 +11,6 @@ const { page } = Astro.props;
 const { Content } = await render(page);
 ---
 <Base title={page.data.title} description={page.data.description} source={page.filePath}>
-  <h1>{page.data.title}</h1>
+  <h1 class="page-title">{page.data.title}</h1>
   <Content />
 </Base>
