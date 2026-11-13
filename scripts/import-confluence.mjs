@@ -90,6 +90,7 @@ for (const p of pages) {
       files.set(a.title, `/wiki-files/${p.id}/${name}`);
       fileCount++;
     } catch (err) {
+      // Too large or failed: these get no local copy. Confluence links stop working once the subscription ends.
       failures.push(`${p.title}: ${a.title}: ${err.message}`);
     }
   }

@@ -35,24 +35,29 @@ function limit(task) {
   });
 }
 
-const downloads = new Map(); // remote URL → local URL
+const downloads = new Map(); // remote URL → promise of the URL to use (local, or the original if it failed)
 const failures = [];
-async function localMedia(url) {
+function localMedia(url) {
   const clean = url.split("?")[0];
   const m = clean.match(/\/wp-content\/uploads\/(.+)$/);
   if (!m) return url;
   const local = `/media/${m[1]}`;
   if (!downloads.has(clean)) {
-    downloads.set(clean, local);
-    if (!existsSync(`public${local}`)) {
-      try {
-        await download(clean.startsWith("http") ? clean : `${site}${clean}`, `public${local}`);
-      } catch (err) {
-        failures.push(`${clean}: ${err.message}`);
-      }
-    }
+    const remote = clean.startsWith("http") ? clean : `${site}${clean}`;
+    downloads.set(
+      clean,
+      existsSync(`public${local}`)
+        ? Promise.resolve(local)
+        : download(remote, `public${local}`).then(
+            () => local,
+            (err) => {
+              failures.push(`${clean}: ${err.message}`);
+              return remote;
+            },
+          ),
+    );
   }
-  return local;
+  return downloads.get(clean);
 }
 
 /** Same-site links become root-relative so they keep working on the new host. */
@@ -74,9 +79,10 @@ async function convert(html) {
   for (const m of html.matchAll(/(?:src|href)="([^"]+)"/g)) {
     if (m[1].includes("/wp-content/uploads/")) urls.add(new URL(m[1], site).toString());
   }
-  await Promise.all([...urls].map((u) => limit(() => localMedia(u))));
+  const resolved = new Map();
+  await Promise.all([...urls].map(async (u) => resolved.set(u.split("?")[0], await limit(() => localMedia(u)))));
   return htmlToMarkdown(html, (url) => {
-    if (url.includes("/wp-content/uploads/")) return downloads.get(new URL(url, site).toString().split("?")[0]) ?? url;
+    if (url.includes("/wp-content/uploads/")) return resolved.get(new URL(url, site).toString().split("?")[0]) ?? url;
     return localLink(url);
   });
 }
