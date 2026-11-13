@@ -4,4 +4,4 @@ date: 2026-11-13
 description: Website und Wiki liegen jetzt auf GitHub und werden über Ditarr gepflegt.
 ---
 
-Website und Makerlab-Wiki liegen jetzt in einem GitHub-Repository. Änderungen gehen über Ditarr in Slack oder direkt auf GitHub.
+Website und Makerlab-Wiki liegen jetzt in einem GitHub-Repository. Änderungen gehen über Ditarr in Slack oder direkt auf GitHub. Die Wiki-Inhalte aus Confluence ziehen bald ebenfalls hierher um.
