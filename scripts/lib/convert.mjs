@@ -81,15 +81,17 @@ export async function writeText(path, text) {
   await writeFile(path, text.endsWith("\n") ? text : `${text}\n`);
 }
 
+const TIMEOUT = 60_000;
+
 export async function download(url, path, headers = {}) {
-  const res = await fetch(url, { headers });
+  const res = await fetch(url, { headers, signal: AbortSignal.timeout(TIMEOUT) });
   if (!res.ok) throw new Error(`${res.status} ${res.statusText} for ${url}`);
   await mkdir(dirname(path), { recursive: true });
   await writeFile(path, Buffer.from(await res.arrayBuffer()));
 }
 
 export async function getJson(url, headers = {}) {
-  const res = await fetch(url, { headers: { Accept: "application/json", ...headers } });
+  const res = await fetch(url, { headers: { Accept: "application/json", ...headers }, signal: AbortSignal.timeout(TIMEOUT) });
   if (!res.ok) throw new Error(`${res.status} ${res.statusText} for ${url}`);
   return { body: await res.json(), headers: res.headers };
 }

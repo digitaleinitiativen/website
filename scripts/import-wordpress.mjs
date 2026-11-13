@@ -19,6 +19,22 @@ async function all(restBase) {
   }
 }
 
+// At most 8 downloads at a time.
+let running = 0;
+const queue = [];
+function limit(task) {
+  return new Promise((resolve, reject) => {
+    const run = () => {
+      running++;
+      task().then(resolve, reject).finally(() => {
+        running--;
+        queue.shift()?.();
+      });
+    };
+    running < 8 ? run() : queue.push(run);
+  });
+}
+
 const downloads = new Map(); // remote URL → local URL
 const failures = [];
 async function localMedia(url) {
@@ -54,13 +70,11 @@ function localLink(url) {
 async function convert(html) {
   // Download every upload referenced in the HTML first, then rewrite synchronously.
   const urls = new Set();
-  for (const m of html.matchAll(/(?:src|href|srcset)="([^"]+)"/g)) {
-    for (const part of m[1].split(",")) {
-      const u = part.trim().split(/\s+/)[0];
-      if (u.includes("/wp-content/uploads/")) urls.add(new URL(u, site).toString());
-    }
+  // Only what the Markdown keeps: src and href. srcset lists every resized copy and would multiply the downloads.
+  for (const m of html.matchAll(/(?:src|href)="([^"]+)"/g)) {
+    if (m[1].includes("/wp-content/uploads/")) urls.add(new URL(m[1], site).toString());
   }
-  for (const u of urls) await localMedia(u);
+  await Promise.all([...urls].map((u) => limit(() => localMedia(u))));
   return htmlToMarkdown(html, (url) => {
     if (url.includes("/wp-content/uploads/")) return downloads.get(new URL(url, site).toString().split("?")[0]) ?? url;
     return localLink(url);
@@ -82,7 +96,9 @@ for (const type of types) {
     continue;
   }
   console.log(`${type.slug}: ${items.length}`);
+  let done = 0;
   for (const item of items) {
+    if (++done % 10 === 0) console.log(`  ${type.slug} ${done}/${items.length}, ${downloads.size} media files so far`);
     const title = decodeEntities(item.title?.rendered ?? item.slug);
     const html = item.content?.rendered ?? "";
     if (/<form[\s>]/i.test(html) || /\[contact-form-7/i.test(html)) forms.push(item.link);
