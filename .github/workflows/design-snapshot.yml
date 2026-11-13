@@ -1,0 +1,29 @@
+name: Design snapshot (temporary)
+
+on:
+  push:
+    branches: [design-snapshot]
+
+permissions:
+  contents: write
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Save HTML, stylesheets and logo of the old site
+        run: |
+          set -x
+          mkdir -p snapshot
+          curl -sSL https://digitaleinitiativen.at/ -o snapshot/home.html
+          curl -sSL https://digitaleinitiativen.at/geschichten/ -o snapshot/geschichten.html || true
+          grep -oE '<link[^>]+stylesheet[^>]*>' snapshot/home.html | grep -oE "href=['\"][^'\"]+" | sed -E "s/href=['\"]//" > snapshot/css-urls.txt
+          i=0; while read -r u; do i=$((i+1)); curl -sSL "${u//&#038;/&}" -o "snapshot/css-$i.css"; echo "$i $u" >> snapshot/css-index.txt; done < snapshot/css-urls.txt
+          curl -sSL https://digitaleinitiativen.at/wp-content/uploads/DI_Logo_Website_bussi.png -o snapshot/logo.png
+          curl -sSL https://digitaleinitiativen.at/wp-content/uploads/2019/11/cropped-di-logo-1-270x270.png -o snapshot/icon.png
+          ls -la snapshot
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add snapshot && git commit -m "Design snapshot [skip ci]" && git push
