@@ -2,6 +2,7 @@
 import { getCollection, render } from "astro:content";
 import WikiTree from "../../components/WikiTree.astro";
 import Base from "../../layouts/Base.astro";
+import { url } from "../../lib/url";
 import { wikiHref, wikiTree } from "../../lib/wiki";
 
 export async function getStaticPaths() {
@@ -21,7 +22,7 @@ const current = wikiHref(entry.id);
 <Base title={entry.data.title} source={`src/content/wiki/${entry.filePath?.split("src/content/wiki/")[1] ?? `${entry.id}.md`}`} wide>
   <div class="layout-wiki">
     <nav class="wiki-nav" aria-label="Wiki">
-      <p><a href="/wiki/"><strong>Makerlab-Wiki</strong></a></p>
+      <p><a href={url("/wiki/")}><strong>Makerlab-Wiki</strong></a></p>
       <WikiTree nodes={tree.children} current={current} />
     </nav>
     <article class="prose">

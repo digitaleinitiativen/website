@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import { url } from "../lib/url";
 import { nav, site } from "../site";
 
 interface Props {
@@ -10,7 +11,7 @@ interface Props {
   wide?: boolean;
 }
 const { title, description = site.tagline, source, wide } = Astro.props;
-const path = Astro.url.pathname;
+const path = Astro.url.pathname.slice(import.meta.env.BASE_URL.replace(/\/+$/, "").length);
 const fullTitle = title ? `${title} · ${site.name}` : site.name;
 ---
 <!doctype html>
@@ -20,21 +21,21 @@ const fullTitle = title ? `${title} · ${site.name}` : site.name;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="alternate" type="application/rss+xml" title={`${site.name}: What's up?`} href="/geschichten/rss.xml" />
+    <link rel="icon" href={url("/favicon.svg")} type="image/svg+xml" />
+    <link rel="alternate" type="application/rss+xml" title={`${site.name}: What's up?`} href={url("/geschichten/rss.xml")} />
   </head>
   <body>
     <header class="site">
       <div class="wrap">
-        <a class="brand" href="/">{site.name}</a>
+        <a class="brand" href={url("/")}>{site.name}</a>
         <nav class="main" aria-label="Hauptmenü">
           <ul>
             {nav.map((item) => (
               <li>
-                <a href={item.href} aria-current={path.startsWith(item.href) ? "page" : undefined}>{item.label}</a>
+                <a href={url(item.href)} aria-current={path.startsWith(item.href) ? "page" : undefined}>{item.label}</a>
                 {item.children && (
                   <ul>
-                    {item.children.map((c) => <li><a href={c.href}>{c.label}</a></li>)}
+                    {item.children.map((c) => <li><a href={url(c.href)}>{c.label}</a></li>)}
                   </ul>
                 )}
               </li>
@@ -55,7 +56,7 @@ const fullTitle = title ? `${title} · ${site.name}` : site.name;
       <div class="wrap">
         <strong>{site.name}</strong><br />
         {site.address.map((line) => <>{line}<br /></>)}
-        <a href="/kontakt/">Kontakt</a> · <a href="/impressum/">Impressum</a> · <a href="/datenschutz/">Datenschutz</a>
+        <a href={url("/kontakt/")}>Kontakt</a> · <a href={url("/impressum/")}>Impressum</a> · <a href={url("/datenschutz/")}>Datenschutz</a>
       </div>
     </footer>
   </body>

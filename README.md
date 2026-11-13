@@ -49,13 +49,15 @@ Einmalig einrichten:
 1. *Settings → Pages → Build and deployment → Source:* **GitHub Actions**.
 2. *Settings → Actions → General → Workflow permissions:* „Allow GitHub Actions to create and approve pull requests“
    anhaken (für den Import).
-3. Bei Gandi im DNS einen Eintrag `neu CNAME digitaleinitiativen.github.io.` anlegen. Die neue Seite ist dann unter
-   https://neu.digitaleinitiativen.at zu sehen, während die alte weiterläuft.
 
-Umstellen, wenn alles passt:
+Die Seite läuft dann unter https://digitaleinitiativen.github.io/website/. Links in Markdown schreibt man trotzdem
+ohne `/website` (z. B. `/wiki/lasercutter/`); der Build ergänzt den Pfad.
 
-1. In `public/CNAME` `digitaleinitiativen.at` eintragen.
-2. Bei Gandi die A-Einträge von `digitaleinitiativen.at` auf die GitHub-Pages-Adressen setzen
+Umstellen auf digitaleinitiativen.at, wenn alles passt:
+
+1. Bei Gandi die A-Einträge von `digitaleinitiativen.at` auf die GitHub-Pages-Adressen setzen
    (185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153) und `www` als CNAME auf
    `digitaleinitiativen.github.io.`.
-3. In *Settings → Pages* „Enforce HTTPS“ anhaken, sobald GitHub das Zertifikat ausgestellt hat.
+2. In *Settings → Pages → Custom domain* `digitaleinitiativen.at` eintragen und „Enforce HTTPS“ anhaken, sobald GitHub
+   das Zertifikat ausgestellt hat. Der nächste Build nimmt die neue Adresse automatisch.
+3. In Ditarrs `.env` `WEBSITE_URL=https://digitaleinitiativen.at` setzen.

@@ -5,7 +5,7 @@ export type WikiEntry = CollectionEntry<"wiki">;
 /** URL of a wiki entry: "lasercutter/index" → /wiki/lasercutter/, "index" → /wiki/ */
 export function wikiHref(id: string): string {
   const path = id.replace(/(^|\/)index$/, "");
-  return path ? `/wiki/${path}/` : "/wiki/";
+  return path ? `/wiki/${path}/` : "/wiki/"; // root-relative, wrap with url() for links
 }
 
 export interface WikiNode {

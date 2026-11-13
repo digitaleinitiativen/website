@@ -1,16 +1,17 @@
 ---
 import { getCollection } from "astro:content";
+import { url } from "../../lib/url";
 import Base from "../../layouts/Base.astro";
 
 const news = (await getCollection("news")).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 <Base title="What's up?" wide>
   <h1>What's up?</h1>
-  <p>Geschichten aus der Community. <a href="/geschichten/rss.xml">RSS-Feed</a></p>
+  <p>Geschichten aus der Community. <a href={url("/geschichten/rss.xml")}>RSS-Feed</a></p>
   <ul class="cards">
     {news.map((n) => (
       <li>
-        <h3><a href={`/geschichten/${n.id}/`}>{n.data.title}</a></h3>
+        <h3><a href={url(`/geschichten/${n.id}/`)}>{n.data.title}</a></h3>
         <p class="muted">{n.data.date.toLocaleDateString("de-AT", { dateStyle: "long" })}</p>
         {n.data.description && <p>{n.data.description}</p>}
       </li>

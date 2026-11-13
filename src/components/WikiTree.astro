@@ -1,4 +1,5 @@
 ---
+import { url } from "../lib/url";
 import { wikiHref, type WikiNode } from "../lib/wiki";
 
 interface Props {
@@ -13,7 +14,7 @@ const { nodes, current } = Astro.props;
     return (
       <li>
         {href ? (
-          <a href={href} aria-current={href === current ? "page" : undefined}>{node.entry!.data.title}</a>
+          <a href={url(href)} aria-current={href === current ? "page" : undefined}>{node.entry!.data.title}</a>
         ) : (
           <span>{node.name}</span>
         )}

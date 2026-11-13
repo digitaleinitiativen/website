@@ -5,7 +5,7 @@ import { site } from "../../site";
 const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
 export async function GET(context: APIContext) {
-  const base = context.site!.toString().replace(/\/$/, "");
+  const base = new URL(import.meta.env.BASE_URL, context.site).toString().replace(/\/$/, "");
   const news = (await getCollection("news")).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
   const items = news
     .slice(0, 30)

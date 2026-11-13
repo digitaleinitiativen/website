@@ -1,7 +1,8 @@
 ---
+import { url } from "../lib/url";
 import Base from "../layouts/Base.astro";
 ---
 <Base title="Nicht gefunden">
   <h1>Diese Seite gibt es nicht (mehr)</h1>
-  <p>Vielleicht hilft die <a href="/">Startseite</a> oder das <a href="/wiki/">Wiki</a> weiter.</p>
+  <p>Vielleicht hilft die <a href={url("/")}>Startseite</a> oder das <a href={url("/wiki/")}>Wiki</a> weiter.</p>
 </Base>

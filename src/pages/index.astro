@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content";
+import { url } from "../lib/url";
 import Base from "../layouts/Base.astro";
 import { site } from "../site";
 
@@ -9,18 +10,18 @@ const news = (await getCollection("news")).sort((a, b) => b.data.date.valueOf() 
   <section class="hero">
     <h1>Wir schaffen einen Ort, an dem Ideen gebaut werden.</h1>
     <p>{site.tagline}</p>
-    <a class="button" href="/veranstaltungen/">Schau vorbei!</a>
-    <a class="button" href="/mitmachen/">Mitmachen!</a>
+    <a class="button" href={url("/veranstaltungen/")}>Schau vorbei!</a>
+    <a class="button" href={url("/mitmachen/")}>Mitmachen!</a>
   </section>
   <h2>Aktuelles aus der Community</h2>
   <ul class="cards">
     {news.map((n) => (
       <li>
-        <h3><a href={`/geschichten/${n.id}/`}>{n.data.title}</a></h3>
+        <h3><a href={url(`/geschichten/${n.id}/`)}>{n.data.title}</a></h3>
         <p class="muted">{n.data.date.toLocaleDateString("de-AT", { dateStyle: "long" })}</p>
         {n.data.description && <p>{n.data.description}</p>}
       </li>
     ))}
   </ul>
-  <p><a href="/geschichten/">Alle Geschichten</a> · <a href="/wiki/">Makerlab-Wiki</a></p>
+  <p><a href={url("/geschichten/")}>Alle Geschichten</a> · <a href={url("/wiki/")}>Makerlab-Wiki</a></p>
 </Base>

@@ -1,5 +1,6 @@
 ---
 import { getCollection, render } from "astro:content";
+import { url } from "../../lib/url";
 import Base from "../../layouts/Base.astro";
 
 export async function getStaticPaths() {
@@ -11,6 +12,6 @@ const { Content } = await render(n);
 <Base title={n.data.title} description={n.data.description} source={n.filePath}>
   <p class="muted">{n.data.date.toLocaleDateString("de-AT", { dateStyle: "long" })}</p>
   <h1>{n.data.title}</h1>
-  {n.data.image && <img src={n.data.image} alt="" />}
+  {n.data.image && <img src={url(n.data.image)} alt="" />}
   <Content />
 </Base>
