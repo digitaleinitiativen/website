@@ -5,7 +5,7 @@ order: 329400080
 confluenceId: "168755261"
 ---
 
-![](https://digitaleinitiativen.atlassian.net/wiki/images/icons/grey_arrow_down.png)Du beginnst wie immer mit der Eingabe der Rohlingsmaße ...
+Du beginnst wie immer mit der Eingabe der Rohlingsmaße ...
 
 ![](/wiki-files/168755261/image-20231111-182034.png)
 

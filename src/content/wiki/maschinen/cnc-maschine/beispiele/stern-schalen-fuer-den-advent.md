@@ -7,7 +7,7 @@ confluenceId: "172720195"
 
 Wähle ein **Hartholzbrett** mit ca. 10-20mm Stärke aus und gib wie gewohnt die Dimensionen ein:
 
-![](https://digitaleinitiativen.atlassian.net/wiki/images/icons/grey_arrow_down.png)zum Beispiel so:
+zum Beispiel so:
 
 ![](/wiki-files/172720195/image-20231116-112629.png)
 
@@ -29,7 +29,7 @@ Die platzsparendste Anordnung kann du mit dem “Nesting-Tool” erzeugen. Marki
 
 * * *
 
-![](https://digitaleinitiativen.atlassian.net/wiki/images/icons/grey_arrow_down.png)Gib folgende Einstellungen ein:
+Gib folgende Einstellungen ein:
 
 ![](/wiki-files/172720195/image-20231116-110602.png)
 
@@ -41,7 +41,7 @@ Jetzt musst du nur noch die Werkzeug-Wege generieren. Markiere die inneren Stern
 
 Es können **mehrere Fräser** dafür **eingegeben** werden. So kann der dickere die Tasche ausräumen und der schmalere kann danach besser in die Ecken fräsen.
 
-![](https://digitaleinitiativen.atlassian.net/wiki/images/icons/grey_arrow_down.png)siehe unter Werkzeug:
+siehe unter Werkzeug:
 
 ![](/wiki-files/172720195/image-20231116-111002.png)![](/wiki-files/172720195/image-20231116-112052.png)
 
@@ -51,7 +51,7 @@ Zum Schluss noch die Außen-Kontur fräsen:
 
 Die Stege nicht vergessen!
 
-![](https://digitaleinitiativen.atlassian.net/wiki/images/icons/grey_arrow_down.png)Die Parameter für die Kontur:
+Die Parameter für die Kontur:
 
 ![](/wiki-files/172720195/image-20231116-111517.png)
 

@@ -7,7 +7,7 @@ confluenceId: "168493131"
 
 Nimm ein Brett und stelle die Dimensionen im Bereich: **Rohlingsmaß einstellen** ein:
 
-![](https://digitaleinitiativen.atlassian.net/wiki/images/icons/grey_arrow_down.png)zum Beispiel folgende Werte einstellen:
+zum Beispiel folgende Werte einstellen:
 
 ![](/wiki-files/168493131/image-20231110-174217.png)
 

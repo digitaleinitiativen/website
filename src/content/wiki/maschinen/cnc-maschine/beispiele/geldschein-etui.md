@@ -5,7 +5,7 @@ order: 329399601
 confluenceId: "168787981"
 ---
 
-![](https://digitaleinitiativen.atlassian.net/wiki/images/icons/grey_arrow_down.png)Stelle deine Rolingsmaße ein ...
+Stelle deine Rolingsmaße ein ...
 
 ![](/wiki-files/168787981/image-20231111-171835.png)
 

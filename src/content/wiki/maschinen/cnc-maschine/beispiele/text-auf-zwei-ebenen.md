@@ -15,7 +15,7 @@ Erstelle den Text des ersten Wortes mit dem **Text zeichnen-Werkzeug**:
 
 und danach gleich das zweite Wort
 
-![](https://digitaleinitiativen.atlassian.net/wiki/images/icons/grey_arrow_down.png)Wähle Text und Schrit aus:
+Wähle Text und Schrit aus:
 
 ![](/wiki-files/172392498/image-20231116-114924.png)
 
@@ -35,7 +35,7 @@ Die gleichzeitig markierten beiden Wörter werden mit dem **Vereinigen-Werkzeug*
 
 Kontrolliere ob diese **Vereinigung auf der GrundSchicht** ist, ansonsten verschiebe sie dorthin. Den Rahmen kannst du auch auf einer eigenen **Ebene Rahmen** erstellen.
 
-![](https://digitaleinitiativen.atlassian.net/wiki/images/icons/grey_arrow_down.png)Das Ergebnis schaut so aus ...
+Das Ergebnis schaut so aus ...
 
 ![](/wiki-files/172392498/image-20231116-151102.png)![](/wiki-files/172392498/image-20231116-151134.png)![](/wiki-files/172392498/image-20231116-151446.png)
 
@@ -43,7 +43,7 @@ Kontrolliere ob diese **Vereinigung auf der GrundSchicht** ist, ansonsten versch
 
 Für den Werkzeug-Weg der oberen Tasche blenden wir im Eben-Menü die Sichtbarkeit der Grundschicht aus und markieren den **Rahmen** und den **Deck-Text**, jetzt noch das Taschen-Werkzeug anklicken und …
 
-![](https://digitaleinitiativen.atlassian.net/wiki/images/icons/grey_arrow_down.png)... gib die richtigen Parameter ein ...
+... gib die richtigen Parameter ein ...
 
 ![](/wiki-files/172392498/image-20231116-152037.png)
 
