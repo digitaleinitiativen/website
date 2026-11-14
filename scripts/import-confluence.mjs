@@ -4,7 +4,7 @@
 import { rm } from "node:fs/promises";
 import { basename, extname } from "node:path";
 import { parseArgs } from "node:util";
-import { download, frontMatter, getJson, htmlToMarkdown, slugify, writeText } from "./lib/convert.mjs";
+import { download, emoticonsToEmoji, frontMatter, getJson, htmlToMarkdown, slugify, writeText } from "./lib/convert.mjs";
 
 const { values } = parseArgs({
   options: {
@@ -28,8 +28,9 @@ async function allPages() {
       `&expand=body.export_view,ancestors,version,extensions.position`;
     const { body } = await getJson(url, auth);
     pages.push(...body.results);
-    if (body.results.length < 50) return pages;
-    start += 50;
+    // Confluence returns fewer than `limit` when bodies are expanded (25), so follow its "next" link instead.
+    if (!body._links?.next || !body.results.length) return pages;
+    start += body.results.length;
   }
 }
 
@@ -39,8 +40,8 @@ async function attachments(pageId) {
   for (;;) {
     const { body } = await getJson(`${base}/wiki/rest/api/content/${pageId}/child/attachment?limit=50&start=${start}`, auth);
     out.push(...body.results);
-    if (body.results.length < 50) return out;
-    start += 50;
+    if (!body._links?.next || !body.results.length) return out;
+    start += body.results.length;
   }
 }
 
@@ -106,7 +107,7 @@ for (const p of pages) {
     return kind === "image" ? url : abs;
   };
 
-  const markdown = htmlToMarkdown(p.body.export_view.value, rewrite);
+  const markdown = htmlToMarkdown(emoticonsToEmoji(p.body.export_view.value), rewrite);
   const path = pathOf(p);
   const file = p === home ? "index.md" : hasChildren.has(p.id) ? `${path}/index.md` : `${path}.md`;
   const position = p.extensions?.position;
