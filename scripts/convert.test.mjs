@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { frontMatter, htmlToMarkdown, slugify } from "./lib/convert.mjs";
+import { emoticonsToEmoji, frontMatter, htmlToMarkdown, slugify } from "./lib/convert.mjs";
 
 test("slugify keeps German readable", () => {
   assert.equal(slugify("Über uns: Vinylcutter 101!"), "ueber-uns-vinylcutter-101");
@@ -23,4 +23,12 @@ test("converts HTML with tables, images and rewritten links", () => {
 
 test("front matter quotes strings and drops empty values", () => {
   assert.equal(frontMatter({ title: 'Say "hi": ok', order: 2, x: undefined }), '---\ntitle: "Say \\"hi\\": ok"\norder: 2\n---\n\n');
+});
+
+test("turns Confluence emoticons into emoji", () => {
+  const base = "https://x.atlassian.net/wiki/s/1/2/abc/_/images/icons/emoticons";
+  assert.equal(emoticonsToEmoji(`Fertig <img class="emoticon" src="${base}/check.png" alt="(tick)">`), "Fertig ✅");
+  assert.equal(emoticonsToEmoji(`<img src="${base}/72/1f4d8.png" alt="(blue star)"> Raum`), "📘 Raum");
+  assert.equal(emoticonsToEmoji(`<img src="${base}/wink.png" alt="(wink)">`), "😉");
+  assert.equal(emoticonsToEmoji(`<img src="/media/a.png">`), `<img src="/media/a.png">`);
 });

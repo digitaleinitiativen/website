@@ -120,3 +120,29 @@ export async function getJson(url, headers = {}) {
   if (!res.ok) throw new Error(`${res.status} ${res.statusText} for ${url}`);
   return { body: await res.json(), headers: res.headers };
 }
+
+/** Confluence's own emoticon file names, for emoticons that aren't a Unicode emoji image. */
+const EMOTICONS = {
+  check: "✅", error: "❌", warning: "⚠️", information: "ℹ️", lightbulb_on: "💡", lightbulb: "💡", star_yellow: "⭐",
+  smile: "🙂", sad: "🙁", wink: "😉", biggrin: "😁", tongue: "😛", thumbs_up: "👍", thumbs_down: "👎", question: "❓",
+  add: "➕", forbidden: "⛔", heart: "❤️", broken_heart: "💔",
+};
+
+/**
+ * Confluence emoticons are images on atlassian.net, which go away with the subscription. This turns them into
+ * the emoji itself: Unicode emoticons have the code point in the file name (".../emoticons/72/1f4d8.png").
+ */
+export function emoticonsToEmoji(html) {
+  return html.replace(/<img\b[^>]*\/emoticons\/[^>]*>/g, (tag) => {
+    const code = tag.match(/data-emoji-id="([0-9a-f]+(?:-[0-9a-f]+)*)"/)?.[1] ?? tag.match(/\/emoticons\/(?:\d+\/)?([0-9a-f]{4,6}(?:-[0-9a-f]{4,6})*)\.(?:png|svg)/)?.[1];
+    if (code) {
+      try {
+        return String.fromCodePoint(...code.split("-").map((h) => parseInt(h, 16)));
+      } catch {
+        // not a code point after all
+      }
+    }
+    const name = tag.match(/\/emoticons\/([\w-]+)\.(?:png|svg)/)?.[1] ?? "";
+    return EMOTICONS[name] ?? "";
+  });
+}
