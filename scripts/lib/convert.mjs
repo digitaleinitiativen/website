@@ -81,13 +81,38 @@ export async function writeText(path, text) {
   await writeFile(path, text.endsWith("\n") ? text : `${text}\n`);
 }
 
-const TIMEOUT = 60_000;
+const TIMEOUT = 120_000;
 
+/** Images above this are scaled down; other files above MAX_FILE are left where they are. */
+const SHRINK_IMAGES_OVER = 1_500_000;
+const MAX_IMAGE_SIDE = 2400;
+export const MAX_FILE = 25_000_000;
+
+/** A file that's too big for the repo (GitHub rejects files over 100 MB, Pages sites over 1 GB). */
+export class TooLarge extends Error {}
+
+/**
+ * Downloads `url` to `path`. Big photos are scaled down to MAX_IMAGE_SIDE, which is plenty for a web page.
+ * Other files over MAX_FILE (audio, video, archives) throw TooLarge, and the caller keeps linking the original.
+ */
 export async function download(url, path, headers = {}) {
   const res = await fetch(url, { headers, signal: AbortSignal.timeout(TIMEOUT) });
   if (!res.ok) throw new Error(`${res.status} ${res.statusText} for ${url}`);
+  let data = Buffer.from(await res.arrayBuffer());
+  if (data.length > SHRINK_IMAGES_OVER && /\.(jpe?g|png|webp)$/i.test(path)) data = await shrinkImage(data, path);
+  if (data.length > MAX_FILE) throw new TooLarge(`${(data.length / 1e6).toFixed(0)} MB is too large for the repo`);
   await mkdir(dirname(path), { recursive: true });
-  await writeFile(path, Buffer.from(await res.arrayBuffer()));
+  await writeFile(path, data);
+}
+
+async function shrinkImage(data, path) {
+  const { default: sharp } = await import("sharp");
+  const image = sharp(data, { limitInputPixels: false })
+    .rotate()
+    .resize({ width: MAX_IMAGE_SIDE, height: MAX_IMAGE_SIDE, fit: "inside", withoutEnlargement: true });
+  const ext = path.toLowerCase().split(".").pop();
+  const out = await (ext === "png" ? image.png({ compressionLevel: 9, palette: true }) : ext === "webp" ? image.webp({ quality: 80 }) : image.jpeg({ quality: 82, mozjpeg: true })).toBuffer();
+  return out.length < data.length ? out : data;
 }
 
 export async function getJson(url, headers = {}) {

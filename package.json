@@ -21,6 +21,7 @@
     "astro": "5.18.2"
   },
   "devDependencies": {
+    "sharp": "0.35.5",
     "turndown": "7.2.5",
     "turndown-plugin-gfm": "1.0.2"
   }
