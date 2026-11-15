@@ -1,0 +1,50 @@
+---
+// Upcoming Meetup events, read from the iCal feed at build time (replaces the WordPress "iCal Events" block).
+import { fetchEvents, formatEventDate } from "../../scripts/lib/ical.mjs";
+import { events as config } from "../site";
+
+interface Props {
+  url?: string;
+  count?: number;
+}
+const { url = config.icalUrl, count = config.count } = Astro.props;
+const all = await fetchEvents(url);
+// A few spare ones, because the script below hides events that started after the last build.
+const list = (all ?? []).slice(0, count + 3);
+---
+<section class="events" data-count={count}>
+  <h2>Die nächsten Events</h2>
+  {list.length > 0 && (
+    <ul>
+      {list.map((e, i) => (
+        <li data-start={e.start.toISOString()} hidden={i >= count}>
+          <span class="date">{formatEventDate(e)}</span>{" "}
+          {e.url ? <a href={e.url} target="_blank" rel="noopener noreferrer">{e.title}</a> : <span>{e.title}</span>}
+        </li>
+      ))}
+    </ul>
+  )}
+  <p class="empty" hidden={list.length > 0}>Gerade sind keine Termine eingetragen.</p>
+  <p>Alle Events findest du auf <a href={config.allUrl}>meetup.com</a>.</p>
+</section>
+
+<script>
+  // The site is rebuilt once a day; drop events that have started since then.
+  for (const section of document.querySelectorAll<HTMLElement>("section.events")) {
+    const count = Number(section.dataset.count);
+    const items = [...section.querySelectorAll<HTMLElement>("li[data-start]")];
+    const upcoming = items.filter((li) => new Date(li.dataset.start!) >= new Date());
+    items.forEach((li) => (li.hidden = !upcoming.slice(0, count).includes(li)));
+    const empty = section.querySelector<HTMLElement>(".empty");
+    if (empty && items.length) empty.hidden = upcoming.length > 0;
+  }
+</script>
+
+<style>
+  .events { max-width: 48rem; margin: 0 auto 3rem; }
+  .events h2 { text-align: center; }
+  .events ul { list-style: none; margin: 0 0 1em; padding: 0; }
+  .events li { padding: 0.5em 0; border-bottom: 1px solid var(--navy); }
+  .events li[hidden] { display: none; }
+  .events .date { font-family: var(--font-mono); white-space: nowrap; margin-right: 0.5em; }
+</style>

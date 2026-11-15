@@ -27,3 +27,13 @@ export const nav: { label: string; href: string; children?: { label: string; hre
     ],
   },
 ];
+
+/**
+ * "Die nächsten Events" on /geschichten/. The iCal feed is read at build time; the deploy workflow
+ * rebuilds the site every night so the list stays current.
+ */
+export const events = {
+  icalUrl: "https://www.meetup.com/digitale-initiativen/events/ical/",
+  allUrl: "https://www.meetup.com/digitale-initiativen/events/",
+  count: 5,
+};
