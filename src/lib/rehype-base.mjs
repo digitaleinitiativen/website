@@ -7,6 +7,10 @@ export default function rehypeBase(base) {
       if ("href" in node.properties) node.properties.href = fix(node.properties.href);
       if ("src" in node.properties) node.properties.src = fix(node.properties.src);
     }
+    // Raw HTML blocks (e.g. tables imported from Confluence) are not parsed into elements, so fix their attributes as text.
+    if (node.type === "raw" && typeof node.value === "string") {
+      node.value = node.value.replace(/\b(src|href)="(\/(?!\/)[^"]*)"/g, (_, attr, url) => `${attr}="${fix(url)}"`);
+    }
     node.children?.forEach(walk);
   };
   return () => (tree) => {

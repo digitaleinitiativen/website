@@ -7,9 +7,7 @@ confluenceId: "197165079"
 
 V-Carving zu deutsch Kegelfräsen, dien in erster Linie zur Gestaltung von Fräsarbeiten, die einer Handschnitzarbeit ähneln. Es lassen sich aber auch (flache) technische Fräsarbeiten durchführen.
 
-Die Oberfläche der Software gliedert sich in verschiedene Bereiche: siehe
-
-[https://digitaleinitiativen.atlassian.net/wiki/spaces/MR/whiteboard/197165099](https://digitaleinitiativen.atlassian.net/wiki/spaces/MR/whiteboard/197165099)
+Die Oberfläche der Software gliedert sich in verschiedene Bereiche.
 
 Am besten startest du mit der Einrichtung des Rohmaterial-Stücks. Wähle dazu
 
