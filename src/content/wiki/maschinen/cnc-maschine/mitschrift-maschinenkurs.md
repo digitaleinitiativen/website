@@ -40,7 +40,7 @@ radiale Zustellung - ae (mm)
 
 **Formeln**
 
-![](https://digitaleinitiativen.atlassian.net/wiki/download/thumbnails/16482322/Bildschirmfoto%202022-11-16%20um%2018.43.36.png?version=1&modificationDate=1668620633664&cacheVersion=1&api=v2&width=204&height=385)
+<img src="/wiki-files/16482322/bildschirmfoto-2022-11-16-um-18-43-36.png" width="204" alt="Formeln: Drehzahl n, Schnittgeschwindigkeit vc, Vorschub vf, Zahnvorschub fz">
 
 Meusburger hat cooles Werkzeugberechnungstool für metallische Werkstoffe auf der Website:
 
