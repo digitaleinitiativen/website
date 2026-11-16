@@ -2,6 +2,7 @@
 // Upcoming Meetup events, read from the iCal feed at build time (replaces the WordPress "iCal Events" block).
 import { fetchEvents, formatEventDate } from "../../scripts/lib/ical.mjs";
 import { events as config } from "../site";
+import { url as siteUrl } from "../lib/url";
 
 interface Props {
   url?: string;
@@ -25,7 +26,7 @@ const list = (all ?? []).slice(0, count + 3);
     </ul>
   )}
   <p class="empty" hidden={list.length > 0}>Gerade sind keine Termine eingetragen.</p>
-  <p>Alle Events findest du auf <a href={config.allUrl}>meetup.com</a>.</p>
+  <p>Alle Events findest du auf <a href={config.allUrl}>meetup.com</a>, Raumbuchungen und interne Termine im <a href={siteUrl("/kalender/")}>Vereinskalender</a>.</p>
 </section>
 
 <script>

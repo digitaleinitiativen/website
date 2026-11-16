@@ -11,7 +11,7 @@ Checklist: [Hosting Checkliste @Digitale Initiativen](/wiki/hosting-mutterschiff
     
 -   **Verantwortlich für Hosting:** InitiativenkoordinatorInnen bzw. zuständiges DI Mitglied
     
--   **Kalendereinträge:** bitte tragt euch in [TeamUp](https://teamup.com/ksxumavc9nawjyzhec) ein, damit es nicht zu Doppelbuchungen kommt.
+-   **Kalendereinträge:** bitte tragt euch bei Ditarr ein (`cal.add`, siehe [Raumbuchung](/wiki/raumbuchung/)), damit es nicht zu Doppelbuchungen kommt. Alle Buchungen siehst du im [Vereinskalender](/kalender/).
     
 
 ### Verpflegung und Getränke

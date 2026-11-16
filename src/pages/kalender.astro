@@ -1,0 +1,128 @@
+---
+// The club calendar: room bookings and internal dates (booked with Ditarr), Fabman machine bookings and Meetup
+// events in one list. Loaded in the browser from Ditarr, so it is always current (replaces Teamup).
+import Base from "../layouts/Base.astro";
+import { url } from "../lib/url";
+import { calendar, events } from "../site";
+
+const webcal = calendar.icsUrl.replace(/^https:/, "webcal:");
+---
+<Base title="Vereinskalender" description="Raumbuchungen, Maschinenbuchungen und Events der Digitalen Initiativen" wide>
+  <h1 class="page-title">Vereinskalender</h1>
+  <section class="calendar" data-json={calendar.jsonUrl} data-days={calendar.days}>
+    <p class="intro">
+      Alles, was im Mutterschiff los ist: 📌 Raumbuchungen und interne Termine, 🛠️ Maschinenbuchungen aus Fabman und
+      📣 öffentliche Events von <a href={events.allUrl}>Meetup</a>. Räume buchst du bei Ditarr mit
+      <code>cal.add</code>, <a href={url("/wiki/raumbuchung/")}>so geht's</a>.
+    </p>
+    <fieldset class="filters">
+      <legend>Anzeigen</legend>
+      <label><input type="checkbox" value="booking" checked /> 📌 Räume &amp; Termine</label>
+      <label><input type="checkbox" value="machine" checked /> 🛠️ Maschinen</label>
+      <label><input type="checkbox" value="event" checked /> 📣 Events</label>
+    </fieldset>
+    <div class="days" aria-live="polite"><p class="status">Kalender wird geladen …</p></div>
+    <p class="subscribe">
+      In deiner Kalender-App abonnieren: <a href={webcal}>Kalender abonnieren</a> oder die Adresse
+      <code>{calendar.icsUrl}</code> hinzufügen.
+    </p>
+  </section>
+</Base>
+
+<script>
+  interface Item {
+    title: string;
+    start: string;
+    end: string;
+    allDay: boolean;
+    kind: "booking" | "machine" | "event";
+    location: string | null;
+    url: string | null;
+  }
+
+  const TZ = "Europe/Vienna";
+  const ICON = { booking: "📌", machine: "🛠️", event: "📣" } as const;
+  const dayKey = new Intl.DateTimeFormat("en-CA", { timeZone: TZ, year: "numeric", month: "2-digit", day: "2-digit" });
+  const dayLabel = new Intl.DateTimeFormat("de-AT", { timeZone: TZ, weekday: "long", day: "numeric", month: "long" });
+  const time = new Intl.DateTimeFormat("de-AT", { timeZone: TZ, hour: "2-digit", minute: "2-digit", hourCycle: "h23" });
+
+  function el<K extends keyof HTMLElementTagNameMap>(tag: K, className?: string, text?: string): HTMLElementTagNameMap[K] {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text) node.textContent = text;
+    return node;
+  }
+
+  for (const section of document.querySelectorAll<HTMLElement>("section.calendar")) {
+    const target = section.querySelector<HTMLElement>(".days")!;
+    const boxes = [...section.querySelectorAll<HTMLInputElement>(".filters input")];
+    let items: Item[] = [];
+
+    const render = () => {
+      const shown = new Set(boxes.filter((b) => b.checked).map((b) => b.value));
+      const visible = items.filter((i) => shown.has(i.kind));
+      target.replaceChildren();
+      if (!visible.length) {
+        target.append(el("p", "status", "In den nächsten Wochen ist nichts eingetragen."));
+        return;
+      }
+      let list: HTMLUListElement | null = null;
+      let current = "";
+      for (const item of visible) {
+        const start = new Date(item.start);
+        const end = new Date(item.end);
+        const key = dayKey.format(start);
+        if (key !== current) {
+          current = key;
+          target.append(el("h2", "day", dayLabel.format(start)));
+          list = el("ul");
+          target.append(list);
+        }
+        const li = el("li", item.kind);
+        const multiDay = dayKey.format(end) !== key && end.getTime() - start.getTime() > 86_400_000 / 2;
+        const when = item.allDay
+          ? "ganztägig"
+          : `${time.format(start)}–${multiDay ? `${dayLabel.format(end)}, ` : ""}${time.format(end)}`;
+        li.append(el("span", multiDay ? "time long" : "time", when), " ", el("span", "icon", ICON[item.kind]), " ");
+        if (item.url) {
+          const a = el("a", "title", item.title);
+          a.href = item.url;
+          a.target = "_blank";
+          a.rel = "noopener noreferrer";
+          li.append(a);
+        } else li.append(el("span", "title", item.title));
+        if (item.location && item.kind === "booking") li.append(el("span", "where", ` · ${item.location}`));
+        list!.append(li);
+      }
+    };
+
+    boxes.forEach((b) => b.addEventListener("change", render));
+
+    fetch(`${section.dataset.json}?days=${section.dataset.days}`)
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json() as Promise<{ items: Item[] }>;
+      })
+      .then((data) => {
+        items = data.items;
+        render();
+      })
+      .catch(() => {
+        target.replaceChildren(el("p", "status", "Der Kalender konnte gerade nicht geladen werden. Probier es später noch einmal oder frag Ditarr mit cal.list."));
+      });
+  }
+</script>
+
+<style>
+  .calendar { max-width: 48rem; margin: 0 auto 3rem; }
+  .filters { border: none; padding: 0; margin: 0 0 1.5em; display: flex; flex-wrap: wrap; gap: 0.5em 1.5em; }
+  .filters legend { font-weight: 700; margin-bottom: 0.25em; }
+  .calendar :global(h2.day) { font-size: 1.15rem; margin: 1.5em 0 0.25em; }
+  .calendar :global(ul) { list-style: none; margin: 0; padding: 0; }
+  .calendar :global(li) { padding: 0.5em 0; border-bottom: 1px solid var(--navy); overflow-wrap: anywhere; }
+  .calendar :global(.time) { font-family: var(--font-mono); white-space: nowrap; margin-right: 0.25em; }
+  .calendar :global(.time.long) { white-space: normal; }
+  .calendar :global(.where) { opacity: 0.8; }
+  .calendar :global(.status) { font-style: italic; }
+  .subscribe { margin-top: 2em; overflow-wrap: anywhere; }
+</style>
