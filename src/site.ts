@@ -37,3 +37,13 @@ export const events = {
   allUrl: "https://www.meetup.com/digitale-initiativen/events/",
   count: 5,
 };
+
+/**
+ * /kalender/: the club calendar from Ditarr (room bookings, internal dates, Fabman machine bookings and Meetup
+ * events), read in the browser so it is always current. Replaces Teamup.
+ */
+export const calendar = {
+  jsonUrl: "https://ditarr.digitaleinitiativen.at/calendar.json",
+  icsUrl: "https://ditarr.digitaleinitiativen.at/calendar.ics",
+  days: 42,
+};

@@ -109,7 +109,7 @@ main.prose > .inner { max-width: 48rem; margin: 0 auto; }
 .muted { opacity: 0.75; font-size: 0.9rem; }
 
 /* Wiki */
-.layout-wiki { display: grid; gap: 2rem; grid-template-columns: 1fr; }
+.layout-wiki { display: grid; gap: 2rem; grid-template-columns: minmax(0, 1fr); }
 @media (min-width: 900px) { .layout-wiki { grid-template-columns: 17rem minmax(0, 48rem); } }
 .wiki-nav { font-size: 0.95rem; background: var(--white); border-radius: var(--radius); padding: 1rem 1.2rem; align-self: start; }
 .wiki-nav a { font-family: var(--font-text); font-weight: 400; text-decoration: none; }
