@@ -24,6 +24,7 @@ Mit 500 € im Jahr hilft dein Unternehmen als Friend of DI mit, dass das weiter
 -   proton.systems
 -   Weavs
 -   Joe Smash Ventures
+-   Stars Media IT
 
 ## Werde Friend of DI
 
