@@ -47,3 +47,8 @@ export const calendar = {
   icsUrl: "https://ditarr.digitaleinitiativen.at/calendar.ics",
   days: 42,
 };
+
+/** /anmeldung-newsletter/: the sign-up form posts to Ditarr, which mails a confirmation link (double opt-in). */
+export const newsletter = {
+  subscribeUrl: "https://ditarr.digitaleinitiativen.at/newsletter/subscribe",
+};

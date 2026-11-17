@@ -1,6 +1,6 @@
 ---
 title: "Datenschutzerklärung"
-updated: "2025-08-07"
+updated: "2026-11-17"
 wordpressId: 40
 ---
 
@@ -124,11 +124,15 @@ Rechtsgrundlage für diese Verarbeitung ist unser berechtigtes Interesse an der 
 
 #### Newsletter
 
-Falls Sie sich für unseren kostenlosen Newsletter anmelden, werden die von Ihnen hierzu abgefragten Daten, also Ihre E-Mail-Adresse sowie – optional – Ihr Name und Ihre Anschrift, an uns übermittelt. Gleichzeitig speichern wir die IP-Adresse des Internetanschlusses von dem aus Sie auf unseren Internetauftritt zugreifen sowie Datum und Uhrzeit Ihrer Anmeldung. Im Rahmen des weiteren Anmeldevorgangs werden wir Ihre Einwilligung in die Übersendung des Newsletters einholen, den Inhalt konkret beschreiben und auf diese Datenschutzerklärung verwiesen. Die dabei erhobenen Daten verwenden wir ausschließlich für den Newsletter-Versand – sie werden deshalb insbesondere auch nicht an Dritte weitergegeben.
+Falls Sie sich für unseren kostenlosen Newsletter anmelden, speichern wir Ihre E-Mail-Adresse und – optional – Ihren Vornamen, außerdem Datum, Uhrzeit und IP-Adresse der Anmeldung. Danach schicken wir Ihnen eine E-Mail mit einem Bestätigungslink (Double-Opt-in); erst wenn Sie ihn anklicken, sind Sie angemeldet, und wir speichern auch Datum, Uhrzeit und IP-Adresse der Bestätigung. Diese Angaben dienen als Nachweis Ihrer Einwilligung. Anmeldungen, die nicht innerhalb von 30 Tagen bestätigt werden, löschen wir.
 
-Rechtsgrundlage hierbei ist Art. 6 Abs. 1 lit. a) DSGVO.
+Rechtsgrundlage hierbei ist Art. 6 Abs. 1 lit. a) DSGVO. Wer sich vor dem Wechsel auf unser eigenes System über Mailchimp angemeldet hat, bleibt mit der damals erteilten Einwilligung angemeldet; wir haben die Anmeldedaten (inklusive Zeitpunkt und IP-Adresse der Anmeldung) dafür aus Mailchimp übernommen.
 
-Die Einwilligung in den Newsletter-Versand können Sie gemäß Art. 7 Abs. 3 DSGVO jederzeit mit Wirkung für die Zukunft widerrufen. Hierzu müssen Sie uns lediglich über Ihren Widerruf in Kenntnis setzen oder den in jedem Newsletter enthaltenen Abmeldelink betätigen.
+Vereinsmitglieder erhalten den Newsletter als Information über das Vereinsgeschehen auch ohne eigene Anmeldung. Rechtsgrundlage ist die Mitgliedschaft im Verein bzw. unser berechtigtes Interesse an der Information unserer Mitglieder (Art. 6 Abs. 1 lit. b) und f) DSGVO). Mitglieder können den Newsletter jederzeit abbestellen. Mitteilungen, die die Mitgliedschaft selbst betreffen (etwa Einladungen zur Generalversammlung), erhalten Mitglieder unabhängig davon.
+
+Den Newsletter verschicken wir über den Dienst Amazon Simple Email Service (SES) der Amazon Web Services EMEA SARL, 38 Avenue John F. Kennedy, L-1855 Luxemburg, mit Servern in Frankfurt am Main. Mit Amazon Web Services besteht ein Vertrag zur Auftragsverarbeitung nach Art. 28 DSGVO. Für den Versand werden Ihre E-Mail-Adresse und der Inhalt des Newsletters an diesen Dienst übermittelt. Wir werten nicht aus, ob oder wann Sie den Newsletter öffnen oder Links darin anklicken.
+
+Die Einwilligung in den Newsletter-Versand können Sie gemäß Art. 7 Abs. 3 DSGVO jederzeit mit Wirkung für die Zukunft widerrufen. Hierzu müssen Sie uns lediglich über Ihren Widerruf in Kenntnis setzen oder den in jedem Newsletter enthaltenen Abmeldelink betätigen. Nach einer Abmeldung behalten wir Ihre E-Mail-Adresse auf einer Sperrliste, damit Sie keinen Newsletter mehr erhalten. Dasselbe gilt für Adressen, an die wir dauerhaft nicht zustellen können.
 
 #### Kontaktanfragen / Kontaktmöglichkeit
 

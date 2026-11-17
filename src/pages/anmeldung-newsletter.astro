@@ -1,0 +1,67 @@
+---
+// Newsletter sign-up (replaces Mailchimp). Ditarr stores the address as unconfirmed and mails a confirmation link;
+// only after the click is someone subscribed (double opt-in). Works without JavaScript too (plain form post).
+import Base from "../layouts/Base.astro";
+import { url } from "../lib/url";
+import { newsletter } from "../site";
+---
+<Base title="Newsletter" description="Melde dich für den Newsletter der Digitalen Initiativen an">
+  <h1 class="page-title">Newsletter</h1>
+  <section class="newsletter">
+    <p>
+      Ein paar Mal im Jahr erzählen wir, was im Mutterschiff und im Makerlab los ist: neue Geräte, Events, Hackathons
+      und was unsere Initiativen so treiben. Kein Spam, Abmelden geht in jeder Mail mit einem Klick.
+    </p>
+    <form method="post" action={newsletter.subscribeUrl} class="newsletter-form">
+      <label><span>E-Mail-Adresse</span> <input type="email" name="email" required autocomplete="email" /></label>
+      <label><span>Vorname <span class="optional">(optional)</span></span> <input type="text" name="name" autocomplete="given-name" maxlength="100" /></label>
+      <label class="hp" aria-hidden="true">Website <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+      <button type="submit" class="button">Anmelden</button>
+      <p class="status" aria-live="polite"></p>
+    </form>
+    <p class="small">
+      Nach dem Absenden bekommst du eine Mail mit einem Bestätigungslink. Erst wenn du ihn anklickst, bist du dabei.
+      Mitglieder bekommen den Newsletter automatisch. Mehr dazu in der <a href={url("/datenschutzerklaerung/")}>Datenschutzerklärung</a>.
+    </p>
+  </section>
+</Base>
+
+<style>
+  .newsletter { max-width: 36rem; margin: 0 auto 4rem; }
+  .newsletter-form { display: grid; gap: 1rem; margin: 2rem 0; }
+  .newsletter-form label { display: grid; gap: 0.3rem; font-weight: 700; }
+  .newsletter-form input { font: inherit; padding: 0.5em 0.6em; border: var(--line) solid var(--navy); background: var(--white); border-radius: 0; width: 100%; box-sizing: border-box; }
+  .newsletter-form input:focus { outline: 3px solid var(--blue); }
+  .newsletter-form button { justify-self: start; cursor: pointer; margin: 0; }
+  .optional { font-weight: 400; }
+  .hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+  .status:empty { display: none; }
+  .status { font-weight: 700; }
+  .small { font-size: 0.95rem; }
+</style>
+
+<script>
+  for (const form of document.querySelectorAll<HTMLFormElement>("form.newsletter-form")) {
+    const status = form.querySelector<HTMLElement>(".status")!;
+    const button = form.querySelector<HTMLButtonElement>("button")!;
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      button.disabled = true;
+      status.textContent = "Einen Moment …";
+      try {
+        const res = await fetch(form.action, {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded", Accept: "application/json" },
+          body: new URLSearchParams(new FormData(form) as unknown as Record<string, string>).toString(),
+        });
+        const data = (await res.json()) as { ok: boolean; message: string };
+        status.textContent = data.message;
+        if (data.ok) form.reset();
+      } catch {
+        status.textContent = "Das hat gerade nicht geklappt. Bitte versuch es später noch einmal.";
+      } finally {
+        button.disabled = false;
+      }
+    });
+  }
+</script>
