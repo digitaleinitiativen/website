@@ -1,6 +1,6 @@
 ---
 title: "Datenschutzerklärung"
-updated: "2025-08-07"
+updated: "2026-11-17"
 wordpressId: 40
 ---
 
@@ -136,7 +136,9 @@ Sofern Sie per Kontaktformular oder E-Mail mit uns in Kontakt treten, werden die
 
 Rechtsgrundlage für diese Verarbeitung ist Art. 6 Abs. 1 lit. b) DSGVO.
 
-Ihre Daten werden gelöscht, sofern Ihre Anfrage abschließend beantwortet worden ist und der Löschung keine gesetzlichen Aufbewahrungspflichten entgegenstehen, wie bspw. bei einer sich etwaig anschließenden Vertragsabwicklung.
+Damit wir Anfragen rasch beantworten, hilft uns unser Vereins-Bot „Ditarr“. Er liest E-Mails an team@digitaleinitiativen.at und lässt mit dem KI-Dienst Claude der Anthropic, PBC (548 Market Street, San Francisco, CA 94104, USA) einen Antwortentwurf aus den Inhalten unserer Website schreiben. Dafür werden Ihr Name, Ihre E-Mail-Adresse, der Betreff und der Text Ihrer Nachricht an Anthropic übermittelt. Anthropic verwendet diese Daten nicht zum Training seiner Modelle. Die Übermittlung in die USA erfolgt auf Grundlage geeigneter Garantien nach Art. 46 DSGVO (Standardvertragsklauseln). Jeder Entwurf wird von einem Mitglied unseres Vorstands gelesen und freigegeben, bevor er an Sie geht; eine automatisierte Entscheidung im Sinne von Art. 22 DSGVO findet nicht statt. Rechtsgrundlage ist unser berechtigtes Interesse an einer zeitnahen Beantwortung (Art. 6 Abs. 1 lit. f) DSGVO).
+
+Ihre Anfrage und unsere Antwort speichern wir für 12 Monate, damit wir bei Rückfragen den Verlauf kennen, und löschen sie danach, sofern keine gesetzlichen Aufbewahrungspflichten entgegenstehen, wie bspw. bei einer sich etwaig anschließenden Vertragsabwicklung.
 
 #### Nutzerbeiträge, Kommentare und Bewertungen
 
